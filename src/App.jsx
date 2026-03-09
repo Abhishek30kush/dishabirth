@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Welcome from './components/Welcome'
 import Countdown from './components/Countdown'
 import BalloonGame from './components/BalloonGame'
 import PhotoGallery from './components/PhotoGallery'
+import MemoryQuiz from './components/MemoryQuiz'
 import CakePage from './components/CakePage'
 import FinalMessage from './components/FinalMessage'
 import FloatingBalloons from './components/common/FloatingBalloons'
@@ -16,7 +17,7 @@ export const CONFIG = {
   birthdayDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   
   // Birthday person's name
-  name: 'Cutiepie',
+  name: 'Kitkat',
   
   // Images for the gallery (use your own images from public/images folder)
   images: [
@@ -32,8 +33,8 @@ export const CONFIG = {
   // Number of candles on the cake
   candleCount: 5,
   
-  // Background music URL (optional - leave empty to disable)
-  musicUrl: '',
+  // Background music - Disabled
+  // musicUrl: '',
 }
 
 function App() {
@@ -44,13 +45,28 @@ function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false)
   const [audioElement, setAudioElement] = useState(null)
 
-  const totalPages = 6
+  const totalPages = 7
 
   const goToNextPage = useCallback(() => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(prev => prev + 1)
+      
+      // Start music after countdown (page 1 -> page 2)
+      if (currentPage === 1 && CONFIG.musicUrl) {
+        if (!audioElement) {
+          const audio = new Audio(CONFIG.musicUrl)
+          audio.loop = true
+          audio.volume = 0.5
+          setAudioElement(audio)
+          audio.play().catch(() => {})
+          setIsMusicPlaying(true)
+        } else {
+          audioElement.play().catch(() => {})
+          setIsMusicPlaying(true)
+        }
+      }
     }
-  }, [currentPage, totalPages])
+  }, [currentPage, totalPages, audioElement])
 
   const goToPage = useCallback((pageIndex) => {
     setCurrentPage(pageIndex)
@@ -132,6 +148,8 @@ function App() {
       case 3:
         return <PhotoGallery key="gallery" images={CONFIG.images} onNext={goToNextPage} />
       case 4:
+        return <MemoryQuiz key="quiz" onNext={goToNextPage} />
+      case 5:
         return (
           <CakePage
             key="cake"
@@ -141,7 +159,7 @@ function App() {
             onAllLit={goToNextPage}
           />
         )
-      case 5:
+      case 6:
         return (
           <FinalMessage
             key="final"

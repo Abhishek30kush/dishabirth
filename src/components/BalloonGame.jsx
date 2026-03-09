@@ -180,7 +180,7 @@ function BalloonGame({ balloonCount, balloonsPopped, onBalloonPop, onAllPopped }
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ type: 'spring', duration: 0.8 }}
                 >
-                  🎉 HAPPY BIRTHDAY CUTIEPIE 🎉
+                  🎉 HAPPY BIRTHDAY KITKAT 🎉
                 </motion.h2>
                 <motion.p
                   className="font-body text-xl text-gray-700 mb-8"

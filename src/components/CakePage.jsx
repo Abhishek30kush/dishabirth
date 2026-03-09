@@ -192,7 +192,7 @@ function CakePage({ candleCount, candlesLit, onCandleLight, onAllLit }) {
                 Hope all your wishes come true ✨
               </h2>
               <p className="font-body text-xl text-gray-700">
-                Happy Birthday Cutiepie! 🎉
+                Happy Birthday Kitkat! 🎉
               </p>
             </motion.div>
           )}
