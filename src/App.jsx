@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Welcome from './components/Welcome'
 import Countdown from './components/Countdown'
@@ -32,9 +32,6 @@ export const CONFIG = {
   
   // Number of candles on the cake
   candleCount: 5,
-  
-  // Background music - Disabled
-  // musicUrl: '',
 }
 
 function App() {
@@ -42,31 +39,14 @@ function App() {
   const [showConfetti, setShowConfetti] = useState(false)
   const [balloonsPopped, setBalloonsPopped] = useState(0)
   const [candlesLit, setCandlesLit] = useState(0)
-  const [isMusicPlaying, setIsMusicPlaying] = useState(false)
-  const [audioElement, setAudioElement] = useState(null)
 
   const totalPages = 7
 
   const goToNextPage = useCallback(() => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(prev => prev + 1)
-      
-      // Start music after countdown (page 1 -> page 2)
-      if (currentPage === 1 && CONFIG.musicUrl) {
-        if (!audioElement) {
-          const audio = new Audio(CONFIG.musicUrl)
-          audio.loop = true
-          audio.volume = 0.5
-          setAudioElement(audio)
-          audio.play().catch(() => {})
-          setIsMusicPlaying(true)
-        } else {
-          audioElement.play().catch(() => {})
-          setIsMusicPlaying(true)
-        }
-      }
     }
-  }, [currentPage, totalPages, audioElement])
+  }, [currentPage, totalPages])
 
   const goToPage = useCallback((pageIndex) => {
     setCurrentPage(pageIndex)
@@ -94,34 +74,9 @@ function App() {
     }
   }, [candlesLit, CONFIG.candleCount])
 
-  const toggleMusic = useCallback(() => {
-    if (!CONFIG.musicUrl) return
-    
-    if (!audioElement) {
-      const audio = new Audio(CONFIG.musicUrl)
-      audio.loop = true
-      setAudioElement(audio)
-      audio.play()
-      setIsMusicPlaying(true)
-    } else {
-      if (isMusicPlaying) {
-        audioElement.pause()
-        setIsMusicPlaying(false)
-      } else {
-        audioElement.play()
-        setIsMusicPlaying(true)
-      }
-    }
-  }, [CONFIG.musicUrl, audioElement, isMusicPlaying])
-
   const handleReplay = useCallback(() => {
     goToPage(0)
-    if (audioElement) {
-      audioElement.pause()
-      audioElement.currentTime = 0
-      setIsMusicPlaying(false)
-    }
-  }, [audioElement, goToPage])
+  }, [goToPage])
 
   const renderPage = () => {
     switch (currentPage) {
@@ -164,9 +119,6 @@ function App() {
           <FinalMessage
             key="final"
             name={CONFIG.name}
-            isMusicPlaying={isMusicPlaying}
-            hasMusic={!!CONFIG.musicUrl}
-            onToggleMusic={toggleMusic}
             onReplay={handleReplay}
           />
         )

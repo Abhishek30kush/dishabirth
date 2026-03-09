@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import PageWrapper from './common/PageWrapper'
 import Button from './common/Button'
 
-function FinalMessage({ name, isMusicPlaying, hasMusic, onToggleMusic, onReplay }) {
+function FinalMessage({ name, onReplay }) {
   return (
     <PageWrapper>
       <div className="text-center z-10 w-full max-w-4xl mx-auto">
@@ -87,27 +87,6 @@ function FinalMessage({ name, isMusicPlaying, hasMusic, onToggleMusic, onReplay 
             ✨ Wish you all the best! ✨
           </p>
         </motion.div>
-
-        {/* Music Toggle Button */}
-        {hasMusic && (
-          <motion.div
-            className="mb-6"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.1 }}
-          >
-            <button
-              onClick={onToggleMusic}
-              className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
-                isMusicPlaying
-                  ? 'bg-birthday-pink text-white shadow-lg'
-                  : 'bg-white text-birthday-pink border-2 border-birthday-pink'
-              }`}
-            >
-              {isMusicPlaying ? '🔊 Music Playing' : '🔇 Turn on Music'}
-            </button>
-          </motion.div>
-        )}
 
         {/* Replay Button */}
         <motion.div
