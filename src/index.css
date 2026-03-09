@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #FFF0F5 0%, #E6E6FA 50%, #F0FFF0 100%);
+  min-height: 100vh;
+}
+
+.font-display {
+  font-family: 'Pacifico', cursive;
+}
+
+.font-body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF69B4;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF1493;
+}
+
+/* Balloon animation */
+@keyframes balloonFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-25px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-2deg);
+  }
+}
+
+.balloon-float {
+  animation: balloonFloat 6s ease-in-out infinite;
+}
+
+/* Confetti particle */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-) rotate(0100vhdeg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  animation: confettiFall 3s ease-in-out forwards;
+}
+
+/* Flame animation */
+@keyframes flicker {
+  0%, 100% {
+    transform: scale(1) rotate(-5deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(0.95) rotate(-3deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.05) rotate(3deg);
+    opacity: 0.85;
+  }
+}
+
+.flame {
+  animation: flicker 0.5s ease-in-out infinite;
+}
+
+/* Pop animation */
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.pop-animation {
+  animation: pop 0.3s ease-out forwards;
+}
+
+/* Button styles */
+.btn-birthday {
+  background: linear-gradient(135deg, #FF69B4, #FF1493);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+}
+
+.btn-birthday:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.6);
+}
+
+.btn-birthday:active {
+  transform: scale(0.98);
+}
+
+/* Glass effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #FF69B4, #FFD700, #87CEEB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Page container */
+.page-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background patterns */
+.bg-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+}
+
